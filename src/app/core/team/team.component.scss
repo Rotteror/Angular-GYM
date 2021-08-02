@@ -1,0 +1,41 @@
+.team{
+    position: relative;
+    width: 100%;
+    padding: 3em;
+}
+
+.team .btn{
+    background-color: #030f27;
+    color: white;
+    
+}
+
+.team .btn:hover {
+    color: #030f27;
+    background: #fdbe33;
+    border-color: #fdbe33;
+}
+
+.team .col {
+    background-color: #fdbe33;
+}
+
+.team .col:nth-child(2) {
+    color: #030f27;
+    background-color: white;
+}
+
+.team .section-header {
+    text-align: center;
+    justify-content: center;
+}
+
+.team .section-header p{
+    font-weight: bold;
+    font-size: 30px;
+    color: #fdbe33;
+}
+.team .section-header h5{
+    font-weight: bolder;
+    color: #030f27;
+}
