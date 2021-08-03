@@ -10,7 +10,7 @@
                 <form [formGroup]="form" (ngSubmit)="loginHandler()">
   
                   <div class="form-outline mb-4">
-                    <input type="email" id="email" class="form-control form-control-lg" formControlName="email">
+                    <input type="email" id="loginEmal" class="form-control form-control-lg" formControlName="email">
                     <label class="form-label" for="email">Email</label>
                   </div>
                   <ng-container *ngIf="form.get('email')?.touched">
@@ -23,7 +23,7 @@
                   </ng-container>
                    {{form.value | json}}
                   <div class="form-outline mb-4">
-                    <input type="password" id="password" class="form-control form-control-lg" formControlName="password">
+                    <input type="password" id="loginPassword" class="form-control form-control-lg" formControlName="password">
                     <label class="form-label" for="password">Password</label>
                   </div>
                   <ng-container *ngIf="form.get('password')?.touched">
