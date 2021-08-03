@@ -12,6 +12,10 @@ export class UserService {
 
   currentUser: IUser | undefined;
 
+  get isLogged(): boolean {
+    return !!this.currentUser;
+  }
+
   constructor(private http: HttpClient) { }
   // use IUser later
 
@@ -24,6 +28,12 @@ export class UserService {
   login(data: { email: string; password: string }) {
     return this.http.post<IUser>(`${API_URL}/users/login`, data, { withCredentials: true }).pipe(
       tap((user) => this.currentUser = user)
+    );
+  }
+
+  logout() {
+    return this.http.get<IUser>(`${API_URL}/users/logout`, {}).pipe(
+      tap(() => this.currentUser = undefined)
     );
   }
 

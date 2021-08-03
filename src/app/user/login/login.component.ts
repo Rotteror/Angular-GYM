@@ -10,6 +10,8 @@ import { UserService } from '../user.service';
 })
 export class LoginComponent implements OnInit {
 
+  errorLogin: string | undefined
+
   form: FormGroup;
 
   constructor(
@@ -30,12 +32,17 @@ export class LoginComponent implements OnInit {
     if (this.form.invalid) { return };
     const { email, password } = this.form.value;
     this.userService.login({ email, password }).subscribe({
-      next: () => {
+      next: (result) => {
         console.log('succesfull login')
+        sessionStorage.setItem('_id', result._id )
+        sessionStorage.setItem('email', result.email )
+        sessionStorage.setItem('username', result.username )
+        sessionStorage.setItem('accessToken', result.accessToken )
         this.router.navigate(['/'])
       },
       error: (err) => {
-        console.log(err)
+        console.log(err.error.message)
+        this.errorLogin = err.error.message
       }
     })
   }

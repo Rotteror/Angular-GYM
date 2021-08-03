@@ -10,6 +10,8 @@ import { UserService } from '../user.service';
 })
 export class RegisterComponent implements OnInit {
 
+  errorRegister: string | undefined
+
   form: FormGroup
   constructor(private userService: UserService, private fb: FormBuilder, private router: Router) {
     this.form = this.fb.group({
@@ -28,11 +30,16 @@ export class RegisterComponent implements OnInit {
     const data = this.form.value;
     if (this.form.invalid) { return; }
     this.userService.register(this.form.value).subscribe({
-      next: () => {
+      next: (result) => {
+        sessionStorage.setItem('_id', result._id )
+        sessionStorage.setItem('email', result.email )
+        sessionStorage.setItem('username', result.username )
+        sessionStorage.setItem('accessToken', result.accessToken )
         this.router.navigate(['/']);
       },
       error: (err) => {
-        console.error(err);
+        console.log(err.error.message)
+        this.errorRegister = err.error.message; 
       }
     })
   }

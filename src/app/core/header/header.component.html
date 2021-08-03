@@ -55,9 +55,13 @@
                     <a href="portfolio.html" class="nav-item nav-link">About Us</a>
                     <a href="contact.html" class="nav-item nav-link">Contact Us</a>
                 </div>
-                <div class="ml-auto">
+                <div *ngIf="!isLogged"class="ml-auto">
                     <a class="btn" href="#">Register</a>
                     <a class="btn" href="#">Login</a>
+                </div>
+                <div *ngIf="isLogged" class="ml-auto">
+                    <a class="btn" href="#">Profile</a>
+                    <a class="btn" (click)="logoutHandler()">Logout</a>
                 </div>
             </div>
             
