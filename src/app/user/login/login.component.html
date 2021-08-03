@@ -7,20 +7,37 @@
               <div class="card-body p-5">
                 <h2 class="text-uppercase text-center mb-5">Login</h2>
   
-                <form>
+                <form [formGroup]="form" (ngSubmit)="loginHandler()">
   
                   <div class="form-outline mb-4">
-                    <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
-                    <label class="form-label" for="form3Example3cg">Email</label>
+                    <input type="email" id="email" class="form-control form-control-lg" formControlName="email">
+                    <label class="form-label" for="email">Email</label>
                   </div>
-  
+                  <ng-container *ngIf="form.get('email')?.touched">
+                    <p *ngIf="form.get('email')?.errors?.required" class="error">
+                      Email is required!
+                    </p>
+                    <p *ngIf="form.get('email')?.errors?.email" class="error">
+                      Email is not valid!
+                    </p>
+                  </ng-container>
+                   {{form.value | json}}
                   <div class="form-outline mb-4">
-                    <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
-                    <label class="form-label" for="form3Example4cg">Password</label>
+                    <input type="password" id="password" class="form-control form-control-lg" formControlName="password">
+                    <label class="form-label" for="password">Password</label>
                   </div>
+                  <ng-container *ngIf="form.get('password')?.touched">
+                    <p *ngIf="form.get('password')?.errors?.required" class="error">
+                      Password is required!
+                    </p>
+                    <p *ngIf="form.get('password')?.errors?.minlength" class="error">
+                      Password must be at least 5 characters!
+                    </p>
+                  </ng-container>
+            
     
                   <div class="d-flex justify-content-center">
-                    <button type="button" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                    <button  class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
                   </div>
   
                   <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="#!" class="fw-bold text-body"><u>Register here</u></a></p>
