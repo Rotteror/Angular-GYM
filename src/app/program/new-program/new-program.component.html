@@ -1,0 +1,52 @@
+<div class="container">
+    <span class="title"><h2>Create New Program:</h2></span>
+<form [formGroup]="formPost" (ngSubmit)="postProgramHandler()">
+    <!-- 2 column grid layout with text inputs for the first and last names -->
+    <div class="row mb-4">
+      <div class="col">
+        <div class="form-outline">
+          <input type="text" id="Title" class="form-control" formControlName="title">
+          <label class="form-label" for="Title">Title</label>
+        </div>
+      </div>
+      {{formPost.value | json}}
+      <div class="col">
+        <div class="form-outline">
+          <input type="text" id="length" class="form-control" formControlName="length">
+          <label class="form-label" for="length">Length</label>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Text input -->
+    <div class="form-outline mb-4">
+      <input type="text" id="bodyFocus" class="form-control" formControlName="bodyFocus">
+      <label class="form-label" for="bodyFocus">Body Focus</label>
+    </div>
+  
+    <!-- Text input -->
+    <div class="form-outline mb-4">
+      <input type="text" id="avgDuration" class="form-control" formControlName="averageDuration">
+      <label class="form-label" for="avgDuration">Average Duration</label>
+    </div>
+  
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+      <input type="text" id="daysPerWeek" class="form-control" formControlName="daysPerWeek">
+      <label class="form-label" for="daysPerWeek">Days Per Week</label>
+    </div>
+  
+ 
+  
+    <!-- Message input -->
+    <div class="form-outline mb-4">
+      <textarea class="form-control" id="description" rows="4" formControlName="description"></textarea>
+      <label class="form-label" for="description">Description</label>
+    </div>
+  
+    
+  
+    <!-- Submit button -->
+    <button class="btn btn-dark">Post program</button>
+  </form>
+</div>

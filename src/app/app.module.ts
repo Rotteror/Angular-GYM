@@ -6,6 +6,7 @@ import { CoreModule } from './core/core.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ProgramModule } from './program/program.module';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     CoreModule,
     UserModule,
+    ProgramModule,
     HttpClientModule,
     FontAwesomeModule,
     AppRoutingModule,
