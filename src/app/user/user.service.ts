@@ -32,7 +32,7 @@ export class UserService {
   }
 
   logout() {
-    return this.http.get<IUser>(`${API_URL}/users/logout`, {}).pipe(
+    return this.http.get<IUser>(`${API_URL}/users/logout`, { withCredentials: true }).pipe(
       tap(() => this.currentUser = undefined)
     );
   }
