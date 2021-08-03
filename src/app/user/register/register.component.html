@@ -26,11 +26,27 @@
                   <input type="email" id="email" class="form-control form-control-lg" formControlName="email">
                   <label class="form-label" for="email">Email</label>
                 </div>
-
+                <ng-container *ngIf="form.get('email')?.touched">
+                  <p *ngIf="form.get('email')?.errors?.required" class="error">
+                    Email is required
+                  </p>
+                  <p *ngIf="form.get('email')?.errors?.email" class="error">
+                    Invalid email !
+                  </p>
+                </ng-container>
                 <div class="form-outline mb-4">
                   <input type="password" id="password" class="form-control form-control-lg" formControlName="password">
                   <label class="form-label" for="password">Password</label>
                 </div>
+                <ng-container *ngIf="form.get('password')?.touched">
+                  <p *ngIf="form.get('password')?.errors?.required" class="error">
+                    Password is required!
+                  </p>
+                  <p *ngIf="form.get('password')?.errors?.minlength" class="error">
+                    Password must be at least 5 characters!
+                  </p>
+                </ng-container>
+          
 
                 <div class="form-outline mb-4">
                   <input type="password" id="rePassword" class="form-control form-control-lg"
