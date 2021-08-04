@@ -18,6 +18,11 @@
           Title is required
         </p>
       </ng-container>
+      <ng-container *ngIf="formPost.get('title')?.touched">
+        <p *ngIf="formPost.get('title')?.errors?.minlength" class="error">
+          Title should be at least 50 characters! 
+        </p>
+      </ng-container>
       <div class="col">
         <div class="form-outline">
           <label class="form-label" for="length">Length</label>

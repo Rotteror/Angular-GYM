@@ -15,20 +15,17 @@
                 </div>
                 <h5 class="mt-2">{{program.title}}</h5>
                 <span class="d-block mb-5">
-                    {{program.description.substring(0,150)}}
+                    {{program.description.substring(0,200).trim()+"..."}}
                 </span>
                 <div class="d-flex justify-content-between stats">
                     <div>
-                        <fa-icon [icon]="icons.faDumbbell" size="1x"></fa-icon><span class="ml-2"> Trainer:
-                            <span id="trainerName">
-                                {{program.owner.username}}
-                            </span>
+                        <fa-icon [icon]="icons.faDumbbell" size="1x"></fa-icon><span id="trainerName" class="ml-2">
+                            Coach: {{program.owner.username}}
                         </span>
                     </div>
                     <div class="d-flex flex-row align-items-center">
-                        <div class="followers">
-                            <!-- Add router link -> Details Program -->
-                            <button class="btn btn-sm" >Details</button>
+                        <div class="details">
+                            <button class="btn btn-sm">Details</button>
                         </div>
                     </div>
                 </div>

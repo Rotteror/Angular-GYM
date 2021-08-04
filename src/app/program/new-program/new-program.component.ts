@@ -14,7 +14,7 @@ export class NewProgramComponent implements OnInit {
 
   constructor(private programService: ProgramService, private fb:FormBuilder) {
     this.formPost = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(5)]],
+      title: ['', [Validators.required, Validators.minLength(50)]],
       length: ['', [Validators.required]],
       bodyFocus: ['', [Validators.required]],
       averageDuration: ['', [Validators.required]],

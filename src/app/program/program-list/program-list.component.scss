@@ -7,13 +7,14 @@
 }
 
 .col-md-4{
-    margin-top: 20px;
+    margin-top:16px;
     margin-bottom: 20px;
 }
 
 button{
     color: white;
-    background-color: #030f27;;
+    background-color: #030f27;
+    margin-right: -6px;
 }
 button:hover{
     background-color:  #fdbe33
@@ -26,9 +27,16 @@ button:hover{
     outline-offset: -10px;
     -moz-outline-radius: 10px;
     -webkit-outline-radius: 10px;
+    
  }
+
  #trainerName{
      font-size: 16px;
      font-weight: bold;
-     
  }
+
+ .d-block{
+     margin-top: 20px;
+ }
+
+ 
