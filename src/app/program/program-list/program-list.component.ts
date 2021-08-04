@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faDumbbell, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { IProgram } from 'src/app/shared/interfaces/program';
+import { ProgramService } from '../program.service';
 
 @Component({
   selector: 'app-program-list',
@@ -8,14 +10,23 @@ import { faDumbbell, faHeart } from '@fortawesome/free-solid-svg-icons'
 })
 export class ProgramListComponent implements OnInit {
 
+  programs: IProgram[] | undefined
+
   icons = {
     faDumbbell,
     faHeart
   }
 
-  constructor() { }
+  constructor(private programService: ProgramService) { 
+    this.fetchPrograms();
+  }
 
   ngOnInit(): void {
+  }
+
+  fetchPrograms(): void{
+    this.programs = undefined;
+    this.programService.loadPrograms().subscribe(programs => this.programs = programs)
   }
 
 }

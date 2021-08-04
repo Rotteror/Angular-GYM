@@ -13,6 +13,11 @@ export class ProgramService {
   constructor(private http: HttpClient) {
 
   }
+  
+  //Load all programs from DB
+  loadPrograms() {
+    return this.http.get<IProgram[]>(`${API_URL}/post`, { withCredentials: true });
+  }
 
 
   postProgram(data: { title: string; description: string; length: string; bodyFocus: string; averageDuration: string; daysPerWeek: string; owner:string}) {

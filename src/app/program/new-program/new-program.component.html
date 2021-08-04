@@ -91,6 +91,6 @@
     </ng-container>
 
     <!-- Submit button -->
-    <button class="btn btn-dark text-center">Post program</button>
+    <button class="btn btn-dark text-center" [disabled]="formPost.invalid">Post program</button>
   </form>
 </div>
