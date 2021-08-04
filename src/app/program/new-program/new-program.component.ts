@@ -8,7 +8,8 @@ import { ProgramService } from '../program.service';
   styleUrls: ['./new-program.component.scss']
 })
 export class NewProgramComponent implements OnInit {
-
+ 
+  
   formPost: FormGroup
 
   constructor(private programService: ProgramService, private fb:FormBuilder) {
@@ -18,7 +19,7 @@ export class NewProgramComponent implements OnInit {
       bodyFocus: ['', [Validators.required]],
       averageDuration: ['', [Validators.required]],
       daysPerWeek: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      description: ['', [Validators.required, Validators.maxLength(1000)]],
     })
    }
 
@@ -32,6 +33,7 @@ export class NewProgramComponent implements OnInit {
     this.programService.postProgram(data).subscribe({
       next:()=>{
         console.log('succesfull post new program')
+        //TO DO: after post navigate to detail Program Page
       },
       error:(err)=>{
         console.error(err.error.message)
