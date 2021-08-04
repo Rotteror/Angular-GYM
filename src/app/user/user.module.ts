@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './user.service';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -18,6 +19,7 @@ import { UserService } from './user.service';
     CommonModule,
     HttpClientModule,
     FormsModule,
+    SharedModule,
     ReactiveFormsModule
   ],
   exports: [

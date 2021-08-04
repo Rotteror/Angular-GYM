@@ -17,8 +17,5 @@ export class ProgramService {
 
   postProgram(data: { title: string; description: string; length: string; bodyFocus: string; averageDuration: string; daysPerWeek: string; owner:string}) {
     return this.http.post<IProgram>(`${API_URL}/post/create`, data, { withCredentials: true });
-    // return this.http.post<IUser>(`${API_URL}/users/register`, data, { withCredentials: true }).pipe(
-    //   tap((user) => this.currentUser = user)
-    // );
   };
 }
