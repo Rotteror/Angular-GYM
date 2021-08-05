@@ -5,13 +5,15 @@ import { ProgramService } from './program.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProgramListComponent } from './program-list/program-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DetailsComponent } from './details/details.component';
 
 
 
 @NgModule({
   declarations: [
     NewProgramComponent,
-    ProgramListComponent
+    ProgramListComponent,
+    DetailsComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   exports:[
     NewProgramComponent,
-    ProgramListComponent
+    ProgramListComponent,
+    DetailsComponent
+
   ],
   providers:[
     ProgramService

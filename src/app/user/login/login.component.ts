@@ -34,10 +34,9 @@ export class LoginComponent implements OnInit {
     this.userService.login({ email, password }).subscribe({
       next: (result) => {
         console.log('succesfull login')
-        sessionStorage.setItem('_id', result._id )
-        sessionStorage.setItem('email', result.email )
-        sessionStorage.setItem('username', result.username )
-        sessionStorage.setItem('accessToken', result.accessToken )
+        localStorage.setItem('_id', result._id )
+        localStorage.setItem('email', result.email )
+        localStorage.setItem('username', result.username )
         this.router.navigate(['/'])
       },
       error: (err) => {

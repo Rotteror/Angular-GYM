@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SliderComponent } from './slider/slider.component';
 import { FeatureComponent } from './feature/feature.component';
 import { TeamComponent } from './team/team.component';
+import { UserService } from '../user/user.service';
 
 
 
@@ -27,6 +28,6 @@ import { TeamComponent } from './team/team.component';
     SliderComponent,
     FeatureComponent,
     TeamComponent
-  ]
+  ],
 })
 export class CoreModule { }

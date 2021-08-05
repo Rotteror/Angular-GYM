@@ -29,10 +29,9 @@ export class HeaderComponent implements OnInit {
     this.userService.logout().subscribe({
       next: () => {
         console.log('succesfull logout')
-        sessionStorage.removeItem('email');
-        sessionStorage.removeItem('_id');
-        sessionStorage.removeItem('username');
-        sessionStorage.removeItem('accessToken');
+        localStorage.removeItem('email');
+        localStorage.removeItem('_id');
+        localStorage.removeItem('username');
         this.router.navigate(['/']);
       },
       error: (err) => {

@@ -15,8 +15,8 @@ import { ProgramModule } from './program/program.module';
   ],
   imports: [
     BrowserModule,
-    CoreModule,
     UserModule,
+    CoreModule,
     ProgramModule,
     HttpClientModule,
     FontAwesomeModule,
