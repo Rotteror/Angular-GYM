@@ -7,6 +7,8 @@ import { SliderComponent } from './slider/slider.component';
 import { FeatureComponent } from './feature/feature.component';
 import { TeamComponent } from './team/team.component';
 import { UserService } from '../user/user.service';
+import { HomeComponent } from './home/home.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 
@@ -17,17 +19,21 @@ import { UserService } from '../user/user.service';
     SliderComponent,
     FeatureComponent,
     TeamComponent,
+    HomeComponent,
   ],
   imports: [
     CommonModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    AppRoutingModule
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
     SliderComponent,
     FeatureComponent,
-    TeamComponent
+    TeamComponent,
+    HomeComponent,
+
   ],
 })
 export class CoreModule { }

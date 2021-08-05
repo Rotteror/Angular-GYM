@@ -2,35 +2,31 @@
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-lg-4 col-md-12">
-                <div class="logo">
-                    <a href="#">
-                        <h1>Temple</h1>
-                    </a>
+                <div class="logo"> 
+                        <h1 id="logoH1">Temple</h1>
                 </div>
             </div>
             <div class="col-lg-8 col-md-7 d-none d-lg-block">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-6">
                         <div class="top-bar-item">
                             <div class="top-bar-icon">
-                                <!-- <i class="fas fa-headset"></i> -->
-                                <fa-icon [icon]="icons.faPhoneAlt" size="3x"></fa-icon>
                             </div>
                             <div class="top-bar-text">
-                                <h3>Call Us</h3>
-                                <p>+044 345 6789</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="top-bar-item">
                             <div class="top-bar-icon">
-                                <i class="flaticon-send-mail"></i>
-                                <fa-icon [icon]="icons.faEnvelope" size="3x"></fa-icon>
                             </div>
                             <div class="top-bar-text">
-                                <h3>Email Us</h3>
-                                <p>test@example.com</p>
+                                <p><span>
+                                        <fa-icon [icon]="icons.faPhoneAlt" size="1x"></fa-icon>
+                                    </span>+044 345 678 933</p>
+                                <p><span>
+                                        <fa-icon [icon]="icons.faEnvelope" size="1x"></fa-icon>
+                                    </span>test@example.com</p>
                             </div>
                         </div>
                     </div>
@@ -47,17 +43,17 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav mr-auto">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="about.html" class="nav-item nav-link">Programs</a>
-                    <a href="service.html" class="nav-item nav-link">Trainers</a>
-                    <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+                    <a routerLink="/home" class="nav-item nav-link">Home</a>
+                    <a routerLink="/programs" class="nav-item nav-link">Programs</a>
+                    <a routerLink="/trainers" class="nav-item nav-link">Trainers</a>
+                    <a routerLink="/about" class="nav-item nav-link">About Us</a>
                 </div>
-                <div *ngIf="!isLogged"class="ml-auto">
-                    <a class="btn" href="#">Register</a>
-                    <a class="btn" href="#">Login</a>
+                <div *ngIf="!isLogged" class="ml-auto">
+                    <a class="btn" routerLink="/register">Register</a>
+                    <a class="btn" routerLink="/login">Login</a>
                 </div>
                 <div *ngIf="isLogged" class="ml-auto">
-                    <a class="btn" href="#">Profile</a>
+                    <a class="btn" routerLink="/profile/">Profile</a>
                     <a class="btn" (click)="logoutHandler()">Logout</a>
                 </div>
             </div>

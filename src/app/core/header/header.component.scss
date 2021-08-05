@@ -19,7 +19,6 @@
     margin-top: 15px;
     
 }
-
 //nav bar css
 .nav-bar {
     position: relative;
@@ -62,7 +61,17 @@
     border-color: #fdbe33;
 }
 
+fa-icon{
+    padding-right: 5px;
+}
+#logoH1{
+    padding-bottom: 20px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
 
+a:hover{
+    cursor: pointer;
+}
 
 @media (min-width: 992px) {
     .top-bar {
