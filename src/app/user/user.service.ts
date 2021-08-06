@@ -10,14 +10,14 @@ const API_URL = environment.apiURL;
 export class UserService {
 
 
-  currentUser: IUser | undefined;
+  currentUser: IUser | null | undefined = undefined;
 
   get isLogged(): boolean {
-    return !!this.currentUser;
+    return localStorage.getItem('token') != undefined;
   }
 
   constructor(private http: HttpClient) { }
-  // use IUser later
+
 
   register(data: { username: string; email: string; password: string }) {
     return this.http.post<IUser>(`${API_URL}/users/register`, data, { withCredentials: true }).pipe(

@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faHeadset, faEnvelope, faPhoneAlt } from '@fortawesome/free-solid-svg-icons'
@@ -13,6 +14,11 @@ export class HeaderComponent implements OnInit {
   get isLogged(): boolean {
     return this.userService.isLogged;
   }
+  
+  // get isLogged(): boolean {
+  //   return localStorage.getItem('username') != undefined;
+  // }
+
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -28,10 +34,11 @@ export class HeaderComponent implements OnInit {
   logoutHandler(): void {
     this.userService.logout().subscribe({
       next: () => {
-        console.log('succesfull logout')
         localStorage.removeItem('email');
         localStorage.removeItem('_id');
         localStorage.removeItem('username');
+        localStorage.removeItem('token')
+
         this.router.navigate(['/']);
       },
       error: (err) => {

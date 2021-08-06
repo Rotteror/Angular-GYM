@@ -33,10 +33,11 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.form.value;
     this.userService.login({ email, password }).subscribe({
       next: (result) => {
-        console.log('succesfull login')
         localStorage.setItem('_id', result._id )
         localStorage.setItem('email', result.email )
         localStorage.setItem('username', result.username )
+        localStorage.setItem('token', result.accessToken )
+
         this.router.navigate(['/'])
       },
       error: (err) => {

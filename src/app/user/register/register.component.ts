@@ -34,6 +34,7 @@ export class RegisterComponent implements OnInit {
         localStorage.setItem('_id', result._id )
         localStorage.setItem('email', result.email )
         localStorage.setItem('username', result.username )
+        localStorage.setItem('token', result.accessToken )
         this.router.navigate(['/']);
       },
       error: (err) => {

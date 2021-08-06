@@ -3,16 +3,24 @@
     background-size: 1366px;
     width: 1366px;
     height: 700px;
-    color: #ffffff;
+    color: #fffaf0;
 }
 
 .lead .btn{
     background-color: #030f27;
     color: white;
+    margin-left: 30px;
 }
 
 .lead .btn:hover {
     color: #030f27;
     background: #fdbe33;
     border-color: #fdbe33;
+}
+
+.display-4{
+    padding-left: 30px;
+}
+.lead{
+    padding-left: 30px;
 }

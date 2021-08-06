@@ -35,5 +35,6 @@ import { AppRoutingModule } from '../app-routing.module';
     HomeComponent,
 
   ],
+  providers:[ ]
 })
 export class CoreModule { }
