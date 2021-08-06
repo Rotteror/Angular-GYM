@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row">
+    <div *ngIf="currentProgram" class="row">
         <div class="col-12 col-md-8">
             <img src="../../../assets/images/man-1282232_1280.jpg" class="img-fluid" alt="Responsive image">
         </div>
@@ -9,19 +9,19 @@
                 <ul class="details-list">
                     <li>
                         <span class="details-header">Average Duration: </span>
-                        <span class="details-value"> Value </span>
+                        <span class="details-value"> {{currentProgram.averageDuration}} </span>
                     </li>
                     <li>
                         <span class="details-header">Length: </span>
-                        <span class="details-value"> Value </span>
+                        <span class="details-value"> {{currentProgram.length}} </span>
                     </li>
                     <li>
                         <span class="details-header">Days Per Week: </span>
-                        <span class="details-value"> Value </span>
+                        <span class="details-value"> {{currentProgram.daysPerWeek}} </span>
                     </li>
                     <li>
                         <span class="details-header">Body Focus: </span>
-                        <span class="details-value"> Value </span>
+                        <span class="details-value"> {{currentProgram.bodyFocus}} </span>
                     </li>
                 </ul>
 
@@ -31,6 +31,7 @@
             </div>
 
             <!-- Show this section if you are Owner -->
+            
             <div class="col-md-12 text-center">
                 <span>
                     <button type="button" class="btn btn-lg">Edit</button>
@@ -38,34 +39,16 @@
                     <button type="button" class="btn btn-lg">Delete</button>
                 </span>
             </div>
-            
-
         </div>
 
         <section id="main-content">
             <div class="container-xl p-3">
                 <div class="row">
                     <div class="col-xs-6">
-                        <h1>4 Week FB Complete: A Customizable Workout Program for Beginner, Intermediate, and Advanced
+                        <h1>{{currentProgram.title}}
                         </h1>
-                        <p id="coach">Coach: <span id="coachName">Renrax</span></p>
-                        <article><span class="tab"></span>ipsum dolor sit amet
-                            consectetur adipisicing elit.
-                            Sunt expedita aliquam voluptatem laborum,
-                            error, distinctio impedit eaque quidem,
-                            vero ea doloremque dignissimos ipsa dolorem porro
-                            dolores debitis velit corrupti nisi. Quae voluptas
-                            corporis dignissimos pariatur! Consequuntur
-                            nam eaque modi placeat tempore recusandae eos nisi at omnis dignissimos facere, itaque
-                            officia fugit. Fugiat nemo non consequuntur minus veritatis quaerat quasi, debitis natus
-                            porro, dolores eligendi quod incidunt voluptates. Consequatur vero ad ea voluptatem
-                            obcaecati quod pariatur harum officia quisquam debitis porro magnam tenetur architecto enim
-                            nobis mollitia nulla, voluptates, ipsum numquam inventore repudiandae ipsam, doloremque
-                            placeat cumque! Tempore deleniti fugit, labore optio ullam delectus vel maiores dignissimos
-                            asperiores numquam voluptate libero veniam laboriosam porro ducimus aspernatur perferendis
-                            beatae. At blanditiis, suscipit dignissimos magnam ducimus doloremque aliquid amet nam modi
-                            earum saepe harum, excepturi quibusdam laudantium animi maxime! Dignissimos modi eos,
-                            laudantium quo quod eaque facilis hic, itaque quae eligendi, officiis aspernatur!</article>
+                        <p id="coach">Coach: <span id="coachName">{{currentProgram.owner.username}}</span></p>
+                        <article><span class="tab"></span>{{currentProgram.description}}</article>
                     </div>
                 </div>
             </div>

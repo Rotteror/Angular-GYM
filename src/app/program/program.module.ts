@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProgramListComponent } from './program-list/program-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DetailsComponent } from './details/details.component';
-import { AppRoutingModule } from '../app-routing.module';
+import { ProgramRoutingModule } from './program-routing.module';
 
 
 
@@ -21,7 +21,7 @@ import { AppRoutingModule } from '../app-routing.module';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    ProgramRoutingModule
   ],
   exports:[
     NewProgramComponent,
