@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   get isLogged(): boolean {
     return this.userService.isLogged;
   }
-  
+
   // get isLogged(): boolean {
   //   return localStorage.getItem('username') != undefined;
   // }
@@ -42,8 +42,7 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/']);
       },
       error: (err) => {
-        console.log(err)
-        console.error(err);
+        console.log(err.error.message);
       }
     })
   }

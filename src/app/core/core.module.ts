@@ -6,9 +6,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SliderComponent } from './slider/slider.component';
 import { FeatureComponent } from './feature/feature.component';
 import { TeamComponent } from './team/team.component';
-import { UserService } from '../user/user.service';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { AuthActivate } from './guards/auth.activate';
 
 
 
@@ -35,6 +35,6 @@ import { AppRoutingModule } from '../app-routing.module';
     HomeComponent,
 
   ],
-  providers:[ ]
+  providers:[ AuthActivate ]
 })
 export class CoreModule { }

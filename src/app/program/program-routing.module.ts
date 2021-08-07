@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthActivate } from '../core/guards/auth.activate';
 import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
 import { ProgramListComponent } from './program-list/program-list.component';
@@ -18,7 +19,13 @@ const routes: Routes = [
             },
             {
                 path: ':id',
-                component: DetailsComponent
+                component: DetailsComponent,
+                canActivate: [AuthActivate],
+                data: {
+                    authenticationRequired: true,
+                    authenticationFailureRedirectUrl: '/login'
+                }
+
             },
             {
                 path: 'edit/:id',

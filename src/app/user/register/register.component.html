@@ -17,7 +17,7 @@
                   <input type="text" id="username" class="form-control form-control-lg" formControlName="username">
                   <label class="form-label" for="username">Username</label>
                 </div>
-                {{form.value | json}}
+                
                 <ng-container *ngIf="form.get('username')?.touched">
                   <p *ngIf="form.get('username')?.errors?.required" class="error">
                     Username is required

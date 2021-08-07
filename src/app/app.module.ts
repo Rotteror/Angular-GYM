@@ -10,14 +10,15 @@ import { ProgramModule } from './program/program.module';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
-    CoreModule,
     UserModule,
+    CoreModule,
     ProgramModule,
     HttpClientModule,
     FontAwesomeModule,
