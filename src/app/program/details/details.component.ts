@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IProgram } from 'src/app/shared/interfaces/program';
 import { ProgramService } from '../program.service';
 
@@ -16,13 +16,13 @@ export class DetailsComponent implements OnInit {
   constructor(
     private programService: ProgramService,
     private activatedRoute: ActivatedRoute,
-  
+    private router: Router
   ) {
     this.fetchCurrentProgram();
-   }
+  }
 
   ngOnInit(): void {
-    
+
   }
 
   fetchCurrentProgram(): void {
@@ -31,8 +31,20 @@ export class DetailsComponent implements OnInit {
     this.programService.loadCurrentProgram(id).subscribe(program => this.currentProgram = program);
   }
 
-  deleteHandler(): void{
-    
+  deleteHandler(): void {
+    const id = this.currentProgram?._id
+    if (!id) {
+      throw new Error('Something went wrong , missing arguments');
+    }
+    console.log('in handler')
+    this.programService.deleteProgram(id).subscribe({
+      next: () => {
+        console.log('succesfully delete record')
+        this.router.navigate(['/'])
+      },
+      error: (err) => {
+        console.log(err.error.message)
+      }
+    });
   }
-
 }

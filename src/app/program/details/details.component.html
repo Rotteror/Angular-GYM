@@ -34,10 +34,10 @@
 
             <div class="col-md-12 text-center">
                 <span>
-                    <button routerLink = '/programs/edit/{{currentProgram._id}}' type="button"
+                    <button routerLink='/programs/edit/{{currentProgram._id}}' type="button"
                         class="btn btn-lg">Edit</button>
                     <span class="p-2"></span>
-                    <button type="button" class="btn btn-lg">Delete</button>
+                    <button type="button" class="btn btn-lg" (click)="deleteHandler()">Delete</button>
                 </span>
             </div>
         </div>
