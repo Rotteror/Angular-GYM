@@ -7,6 +7,7 @@ import { ProgramListComponent } from './program-list/program-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DetailsComponent } from './details/details.component';
 import { ProgramRoutingModule } from './program-routing.module';
+import { EditComponent } from './edit/edit.component';
 
 
 
@@ -14,7 +15,8 @@ import { ProgramRoutingModule } from './program-routing.module';
   declarations: [
     NewProgramComponent,
     ProgramListComponent,
-    DetailsComponent
+    DetailsComponent,
+    EditComponent
   ],
   imports: [
     CommonModule,
@@ -26,8 +28,8 @@ import { ProgramRoutingModule } from './program-routing.module';
   exports:[
     NewProgramComponent,
     ProgramListComponent,
-    DetailsComponent
-
+    DetailsComponent,
+    EditComponent
   ],
   providers:[
     ProgramService

@@ -27,4 +27,8 @@ export class ProgramService {
   postProgram(data: { title: string; description: string; length: string; bodyFocus: string; averageDuration: string; daysPerWeek: string; owner: string }) {
     return this.http.post<IProgram>(`${API_URL}/post/create`, data, { withCredentials: true });
   };
+
+  editProgram(id: any, data: {}) {
+    return this.http.put<IProgram>(`${API_URL}/post/${id}`, data, { withCredentials: true });
+  }
 }

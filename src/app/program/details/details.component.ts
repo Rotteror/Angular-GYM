@@ -31,4 +31,8 @@ export class DetailsComponent implements OnInit {
     this.programService.loadCurrentProgram(id).subscribe(program => this.currentProgram = program);
   }
 
+  deleteHandler(): void{
+    
+  }
+
 }
