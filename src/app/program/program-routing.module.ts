@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthActivate } from '../core/guards/auth.activate';
 import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
+import { NewProgramComponent } from './new-program/new-program.component';
 import { ProgramListComponent } from './program-list/program-list.component';
 
 
@@ -32,6 +33,14 @@ const routes: Routes = [
                 component: EditComponent
             },
         ]
+    },
+    {
+        path: 'add-program',
+        component: NewProgramComponent,
+        data: {
+            authenticationRequired: true,
+            authenticationFailureRedirectUrl: '/login'
+        }
     }
 ]
 @NgModule({

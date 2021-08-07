@@ -45,20 +45,24 @@ export class EditComponent implements OnInit {
         description: this.currentProgram.description
       })
     });
+  };
+
+  cancelEditHandler(): void {
+    this.router.navigate(['../'])
   }
 
   editProgramHandler(): void {
     const data = this.editPost.value;
-    const id = this.currentProgram?._id 
+    const id = this.currentProgram?._id
     if (data.invalid) {
       return
     };
-    this.programService.editProgram(id , data).subscribe({
-      next: ()=>{
+    this.programService.editProgram(id, data).subscribe({
+      next: () => {
         console.log('succesfully edit post');
         //router navigate to details page
       },
-      error: (err)=>{
+      error: (err) => {
         console.log(err.error.message)
       }
     })

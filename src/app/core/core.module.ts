@@ -33,7 +33,6 @@ import { AuthActivate } from './guards/auth.activate';
     FeatureComponent,
     TeamComponent,
     HomeComponent,
-
   ],
   providers:[ AuthActivate ]
 })

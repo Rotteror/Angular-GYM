@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ProgramService } from '../program.service';
 
 @Component({
@@ -8,11 +9,11 @@ import { ProgramService } from '../program.service';
   styleUrls: ['./new-program.component.scss']
 })
 export class NewProgramComponent implements OnInit {
- 
-  
+
+
   formPost: FormGroup
 
-  constructor(private programService: ProgramService, private fb:FormBuilder) {
+  constructor(private programService: ProgramService, private fb: FormBuilder, private router: Router) {
     this.formPost = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(50)]],
       length: ['', [Validators.required]],
@@ -21,21 +22,25 @@ export class NewProgramComponent implements OnInit {
       daysPerWeek: ['', [Validators.required]],
       description: ['', [Validators.required, Validators.maxLength(1000)]],
     })
-   }
+  }
 
   ngOnInit(): void {
   }
 
-  postProgramHandler():void{
+  cancelPostHandler(): void{
+    this.router.navigate(['../'])
+  }
+
+  postProgramHandler(): void {
     const data = this.formPost.value;
     data.owner = sessionStorage.getItem('_id');
-    if (this.formPost.invalid) { return;}
+    if (this.formPost.invalid) { return; }
     this.programService.postProgram(data).subscribe({
-      next:()=>{
+      next: (result) => {
         console.log('succesfull post new program')
-        //TO DO: after post navigate to detail Program Page
+        this.router.navigate(['/programs', result._id]);
       },
-      error:(err)=>{
+      error: (err) => {
         console.error(err.error.message)
       }
     })
