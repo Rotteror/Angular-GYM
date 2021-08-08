@@ -37,10 +37,10 @@ export class ProgramService {
   }
 
   followProgram(data: {}) {
-    return this.http.post(`${API_URL}/post/follow`, { data }, { withCredentials: true });
+    return this.http.post<IProgram>(`${API_URL}/post/follow`, { data }, { withCredentials: true });
   }
 
   unfollowProgram(data: {}) {
-    return this.http.post(`${API_URL}/post/unfollow`, { data }, { withCredentials: true });
+    return this.http.post<IProgram>(`${API_URL}/post/unfollow`, { data }, { withCredentials: true });
   }
 }

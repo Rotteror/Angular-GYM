@@ -27,16 +27,11 @@
 
             </div>
             <div *ngIf="!isFollower" class="col-md-12 text-center">
-                
                     <button type="button" class="btn btn-lg" (click)="followHandler()">Follow</button>
-                
             </div>
             <div *ngIf="isFollower" class="col-md-12 text-center">
-               
                     <button type="button" class="btn btn-lg" (click)="unfollowHandler()">Unfollow</button>
-               
             </div>
-            <p>{{isFollower}}</p>
 
             <!-- Show this section if you are Owner -->
 
