@@ -26,12 +26,20 @@
                 </ul>
 
             </div>
-            <div class="col-md-12 text-center">
-                <button type="button" class="btn btn-lg" (click)="followHandler()">Follow</button>
+            <div *ngIf="!isFollower" class="col-md-12 text-center">
+                
+                    <button type="button" class="btn btn-lg" (click)="followHandler()">Follow</button>
+                
             </div>
+            <div *ngIf="isFollower" class="col-md-12 text-center">
+               
+                    <button type="button" class="btn btn-lg" (click)="unfollowHandler()">Unfollow</button>
+               
+            </div>
+            <p>{{isFollower}}</p>
 
             <!-- Show this section if you are Owner -->
-            
+
             <div *ngIf="isOwner" class="col-md-12 text-center">
                 <span>
                     <button routerLink='/programs/edit/{{currentProgram._id}}' type="button"

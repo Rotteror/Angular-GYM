@@ -11,11 +11,20 @@ import { ProgramService } from '../program.service';
 export class DetailsComponent implements OnInit {
 
   currentProgram: IProgram | undefined;
+  userId = localStorage.getItem('_id');
 
-  get isOwner(): boolean{
-    return localStorage.getItem('_id') === this.currentProgram?.owner._id
+
+  get isOwner(): boolean {
+    return this.userId === this.currentProgram?.owner._id
   }
-  
+
+  get isFollower(): boolean {
+    if (this.currentProgram) {
+      return this.currentProgram.followers.includes(this.userId + '');
+    }
+    return false;
+  }
+
 
   constructor(
     private programService: ProgramService,
@@ -33,7 +42,7 @@ export class DetailsComponent implements OnInit {
     this.currentProgram = undefined;
     const id = this.activatedRoute.snapshot.params.id;
     this.programService.loadCurrentProgram(id).subscribe(program => this.currentProgram = program);
-  }
+  };
 
   deleteHandler(): void {
     const id = this.currentProgram?._id
@@ -50,14 +59,28 @@ export class DetailsComponent implements OnInit {
         console.log(err.error.message)
       }
     });
-  }
+  };
 
   followHandler(): void {
     const postId = this.currentProgram?._id;
     const userId = localStorage.getItem('_id');
-    this.programService.followProgram({userId, postId }).subscribe({
+    this.programService.followProgram({ userId, postId }).subscribe({
       next: () => {
-        console.log('succesfully follow program')
+        this.fetchCurrentProgram();
+      },
+      error: (err) => {
+        console.log(err.error.message);
+      }
+    })
+
+  };
+
+  unfollowHandler(): void {
+    const postId = this.currentProgram?._id;
+    const userId = localStorage.getItem('_id');
+    this.programService.unfollowProgram({ userId, postId }).subscribe({
+      next: () => {
+        this.fetchCurrentProgram();
       },
       error: (err) => {
         console.log(err.error.message);

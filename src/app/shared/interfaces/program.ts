@@ -6,6 +6,6 @@ export interface IProgram {
     bodyFocus: string,
     averageDuration: string,
     daysPerWeek: string,
-    followers:string[],
+    followers: string[],
     owner: any,
 }
