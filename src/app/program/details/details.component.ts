@@ -12,6 +12,10 @@ export class DetailsComponent implements OnInit {
 
   currentProgram: IProgram | undefined;
 
+  get isOwner(): boolean{
+    return localStorage.getItem('_id') === this.currentProgram?.owner._id
+  }
+  
 
   constructor(
     private programService: ProgramService,
@@ -46,5 +50,19 @@ export class DetailsComponent implements OnInit {
         console.log(err.error.message)
       }
     });
+  }
+
+  followHandler(): void {
+    const postId = this.currentProgram?._id;
+    const userId = localStorage.getItem('_id');
+    this.programService.followProgram({userId, postId }).subscribe({
+      next: () => {
+        console.log('succesfully follow program')
+      },
+      error: (err) => {
+        console.log(err.error.message);
+      }
+    })
+
   }
 }

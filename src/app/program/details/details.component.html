@@ -27,12 +27,12 @@
 
             </div>
             <div class="col-md-12 text-center">
-                <button type="button" class="btn btn-lg">Follow</button>
+                <button type="button" class="btn btn-lg" (click)="followHandler()">Follow</button>
             </div>
 
             <!-- Show this section if you are Owner -->
-
-            <div class="col-md-12 text-center">
+            
+            <div *ngIf="isOwner" class="col-md-12 text-center">
                 <span>
                     <button routerLink='/programs/edit/{{currentProgram._id}}' type="button"
                         class="btn btn-lg">Edit</button>

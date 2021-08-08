@@ -35,4 +35,8 @@ export class ProgramService {
   deleteProgram(id: string) {
     return this.http.get<IProgram>(`${API_URL}/post/delete/${id}`, { withCredentials: true });
   }
+
+  followProgram(data: {}) {
+    return this.http.post(`${API_URL}/post/follow/`, { data }, { withCredentials: true });
+  }
 }
