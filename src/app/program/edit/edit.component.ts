@@ -57,15 +57,18 @@ export class EditComponent implements OnInit {
     if (data.invalid) {
       return
     };
-    this.programService.editProgram(id, data).subscribe({
-      next: () => {
-        console.log('succesfully edit post');
-        //router navigate to details page
-      },
-      error: (err) => {
-        console.log(err.error.message)
-      }
-    })
+    const confirmed = confirm('Are you sure you want to edit this Article!');
+    if(confirmed){
+      this.programService.editProgram(id, data).subscribe({
+        next: () => {
+          console.log('succesfully edit post');
+          this.router.navigate(['programs', id])
+        },
+        error: (err) => {
+          console.log(err.error.message)
+        }
+      })
+    }
 
   }
 

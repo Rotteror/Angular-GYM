@@ -34,3 +34,12 @@
         <!-- End of ROW-MT1 -->
     </div>
 </div>
+
+<div class="container" *ngIf="!programs">
+    <div class="row">
+        <div class="title">
+            <h4>No programs listed yet. Be the first post first program</h4>
+            <button class="btn btn-sm" routerLink="/add-program">Post</button>
+        </div>
+    </div>
+</div>

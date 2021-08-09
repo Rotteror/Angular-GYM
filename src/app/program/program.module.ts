@@ -11,6 +11,7 @@ import { EditComponent } from './edit/edit.component';
 
 
 
+
 @NgModule({
   declarations: [
     NewProgramComponent,
@@ -23,7 +24,8 @@ import { EditComponent } from './edit/edit.component';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    ProgramRoutingModule
+    ProgramRoutingModule,
+    
   ],
   exports:[
     NewProgramComponent,

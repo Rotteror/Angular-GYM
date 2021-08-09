@@ -11,9 +11,10 @@ import { ProgramModule } from './program/program.module';
 
 
 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

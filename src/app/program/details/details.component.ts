@@ -13,7 +13,6 @@ export class DetailsComponent implements OnInit {
   currentProgram: IProgram | undefined;
   userId = localStorage.getItem('_id');
 
-
   get isOwner(): boolean {
     return this.userId === this.currentProgram?.owner._id
   }
@@ -34,14 +33,16 @@ export class DetailsComponent implements OnInit {
     this.fetchCurrentProgram();
   }
 
-  ngOnInit(): void {
 
+  ngOnInit(): void {
   }
 
   fetchCurrentProgram(): void {
     this.currentProgram = undefined;
     const id = this.activatedRoute.snapshot.params.id;
-    this.programService.loadCurrentProgram(id).subscribe(program => this.currentProgram = program);
+    this.programService.loadCurrentProgram(id).subscribe(program =>
+      this.currentProgram = program,
+    );
   };
 
   deleteHandler(): void {
@@ -49,23 +50,24 @@ export class DetailsComponent implements OnInit {
     if (!id) {
       throw new Error('Something went wrong , missing arguments');
     }
-    console.log('in handler')
-    this.programService.deleteProgram(id).subscribe({
-      next: () => {
-        console.log('succesfully delete record')
-        this.router.navigate(['/'])
-      },
-      error: (err) => {
-        console.log(err.error.message)
-      }
-    });
+    const confirmed = confirm('Are you sure you want delete this article!')
+    if (confirmed) {
+      this.programService.deleteProgram(id).subscribe({
+        next: () => {
+          this.router.navigate(['/'])
+        },
+        error: (err) => {
+          console.log(err.error.message)
+        }
+      });
+    }
   };
 
   followHandler(): void {
     const postId = this.currentProgram?._id;
     const userId = localStorage.getItem('_id');
     this.programService.followProgram({ userId, postId }).subscribe({
-      next: () => {
+      next: (res) => {
         this.fetchCurrentProgram();
       },
       error: (err) => {
@@ -73,13 +75,14 @@ export class DetailsComponent implements OnInit {
       }
     })
 
+
   };
 
   unfollowHandler(): void {
     const postId = this.currentProgram?._id;
     const userId = localStorage.getItem('_id');
     this.programService.unfollowProgram({ userId, postId }).subscribe({
-      next: () => {
+      next: (res) => {
         this.fetchCurrentProgram();
       },
       error: (err) => {

@@ -18,10 +18,11 @@ export class ProgramListComponent implements OnInit {
   }
 
   constructor(private programService: ProgramService) { 
-    this.fetchPrograms();
   }
-
+  
   ngOnInit(): void {
+    this.fetchPrograms();
+    
   }
 
   fetchPrograms(): void{
