@@ -2,8 +2,8 @@
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-lg-4 col-md-12">
-                <div class="logo"> 
-                        <h1 id="logoH1">Temple</h1>
+                <div class="logo">
+                    <h1 id="logoH1">Temple</h1>
                 </div>
             </div>
             <div class="col-lg-8 col-md-7 d-none d-lg-block">
@@ -53,7 +53,7 @@
                     <a class="btn" routerLink="/login">Login</a>
                 </div>
                 <div *ngIf="isLogged" class="ml-auto">
-                    <a class="btn" routerLink="/profile/">Profile</a>
+                    <a class="btn" [routerLink]="['/profile', userId]">Profile</a>
                     <a class="btn" (click)="logoutHandler()">Logout</a>
                 </div>
             </div>

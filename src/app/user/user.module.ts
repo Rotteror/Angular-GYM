@@ -7,12 +7,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { UserRoutingModule } from './user-routing.module';
 import { UserService } from './user.service';
+import { ProfileComponent } from './profile/profile.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
@@ -20,11 +23,13 @@ import { UserService } from './user.service';
     FormsModule,
     SharedModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
     UserRoutingModule
   ],
   exports: [
     LoginComponent,
     RegisterComponent,
+    ProfileComponent
   ],
   providers: [
     UserService

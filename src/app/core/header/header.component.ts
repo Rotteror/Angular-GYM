@@ -14,10 +14,9 @@ export class HeaderComponent implements OnInit {
   get isLogged(): boolean {
     return this.userService.isLogged;
   }
+  userId: string | null | undefined
 
-  // get isLogged(): boolean {
-  //   return localStorage.getItem('username') != undefined;
-  // }
+
 
 
   constructor(private userService: UserService, private router: Router) { }
@@ -29,6 +28,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userId = localStorage.getItem('_id');
+
   }
 
   logoutHandler(): void {
@@ -38,7 +39,6 @@ export class HeaderComponent implements OnInit {
         localStorage.removeItem('_id');
         localStorage.removeItem('username');
         localStorage.removeItem('token')
-
         this.router.navigate(['/']);
       },
       error: (err) => {

@@ -29,6 +29,11 @@ async function deletePost(id) {
     return post.delete();
 }
 
+async function getPostsByUserId(id){
+    const post = await Post.find({owner: id})
+    return post
+}
+
 async function followPost(userId, postId) {
     const user = await User.findById(userId).populate('programs');
     const post = await Post.findById(postId).populate('user');
@@ -53,10 +58,13 @@ async function followPost(userId, postId) {
     user.programs.push(post);
     post.followers.push(user);
 
-    return Promise.all([(
-        user.save(),
-        post.save())
-    ]);
+    // return Promise.all([(
+    //     user.save(),
+    //     post.save())
+    // ]);
+    user.save();
+    post.save();
+    return post;
 };
 
 async function unfollowPost(userId, postId) {
@@ -96,4 +104,5 @@ module.exports = {
     followPost,
     unfollowPost,
     deletePost,
+    getPostsByUserId,
 }

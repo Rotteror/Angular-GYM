@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { isAuth, isOwner } = require('../middlewares/guards');
 const preload = require('../middlewares/preload');
-const { getAllPost, createPost, getPostById, updatePost, deletePost, followPost, unfollowPost } = require('../services/post');
+const { getAllPost, createPost, getPostById, updatePost, deletePost, followPost, unfollowPost, getPostsByUserId } = require('../services/post');
 const parserError = require('../utils/errorParser');
 
 
@@ -82,12 +82,23 @@ router.post('/follow', isAuth(), async (req, res) => {
     }
 })
 
-router.post('/unfollow', isAuth(), async (req, res)=> {
+router.post('/unfollow', isAuth(), async (req, res) => {
     const userId = req.user._id;
     const postId = req.body.data.postId;
 
     try {
         const result = await unfollowPost(userId, postId);
+        res.status(200).json(result)
+    } catch (err) {
+        const message = parserError(err);
+        res.status(err.status || 400).json({ message });
+    }
+})
+
+router.get('/profile/:id', isAuth(), async (req, res) => {
+    const ownerId = req.params.id;
+    try {
+        const result = await getPostsByUserId(ownerId)
         res.status(200).json(result)
     } catch (err) {
         const message = parserError(err);

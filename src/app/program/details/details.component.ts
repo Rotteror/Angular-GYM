@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 import { IProgram } from 'src/app/shared/interfaces/program';
 import { ProgramService } from '../program.service';
 
@@ -30,11 +31,12 @@ export class DetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
-    this.fetchCurrentProgram();
   }
-
-
+  
+  
   ngOnInit(): void {
+    this.fetchCurrentProgram();
+    // setTimeout(() => { this.ngOnInit() }, 1000 * 5)
   }
 
   fetchCurrentProgram(): void {
@@ -74,8 +76,7 @@ export class DetailsComponent implements OnInit {
         console.log(err.error.message);
       }
     })
-
-
+  
   };
 
   unfollowHandler(): void {

@@ -29,13 +29,19 @@ export class UserService {
     return this.http.post<IUser>(`${API_URL}/users/login`, data, { withCredentials: true }).pipe(
       tap((user) => this.currentUser = user)
     );
-  }
+  };
 
   logout() {
     return this.http.get<IUser>(`${API_URL}/users/logout`, { withCredentials: true }).pipe(
       tap(() => this.currentUser = undefined)
     );
+  };
+
+  getUserById(id: string){
+    return this.http.get<IUser>(`${API_URL}/users/profile/${id}`, { withCredentials: true });
   }
+
+
 
 }
 

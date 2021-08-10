@@ -1,0 +1,62 @@
+<div class="container">
+      <div *ngIf="user" class="row">
+      <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+      </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" ></div>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">Profile info:</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div *ngIf="user.gender == 'Male'" class="col-md-3 col-lg-3 d-flex justify-content-center ">
+                     <fa-icon [icon]="icons.faMale" size="8x"></fa-icon> 
+                    </div>
+                    <div *ngIf="user.gender == 'Female'" class="col-md-3 col-lg-3 d-flex justify-content-center ">
+                        <fa-icon [icon]="icons.faFemale" size="8x"></fa-icon> 
+                       </div>
+                <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>Username:</td>
+                        <td>{{user.username}}</td>
+                      </tr>
+                      <tr>
+                        <td>Email:</td>
+                        <td>{{user.email}}</td>
+                      </tr>
+                      <tr>
+                        <td>Gender</td>
+                        <td>{{user.gender}}</td>
+                      </tr>
+                         <tr>
+                    </tbody>
+                  </table>
+                  <button type="button" class="btn float-end my-3" (click)="loadProgramsHandler()">{{showPrograms ? "Hide Programs" : "Show My Programs"}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- test here -->
+        <h3 class="panel-title pb-2 mb-0">My Programs:</h3>
+        <ng-container *ngIf="programs && showPrograms">
+        <div class="list-group pb-5" *ngFor="let program of programs">
+            <div class="list-group-item list-group-item-action" aria-current="true">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{program.title}}</h5>
+                <span><a routerLink="/programs/{{program._id}}">Details</a></span>
+              </div>
+              <p class="mb-1">
+               {{program.description.substring(0,40)}}
+              </p>
+              <small>Donec id elit non mi porta.</small>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="noPrograms">
+            <h3 class="panel-title pb-2 mb-0">You don't have any programs listed yet. Post your first program <a routerLink="/add-program" >here </a>! </h3>
+        </ng-container>
+</div>
+    

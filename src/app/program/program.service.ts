@@ -41,4 +41,8 @@ export class ProgramService {
   unfollowProgram(data: {}) {
     return this.http.post<IProgram>(`${API_URL}/post/unfollow`, { data }, { withCredentials: true });
   }
+
+  loadUserPrograms(id: string) {
+    return this.http.get<IProgram>(`${API_URL}/post/profile/${id}`, { withCredentials: true });
+  }
 }

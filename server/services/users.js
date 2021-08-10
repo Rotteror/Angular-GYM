@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { SECRET } = require('../config');
 
-async function register(username, email, password) {
+async function register(username, email, gender, password) {
     //check if user exist
     const existing = await User.findOne({ email });
     if (existing) {
@@ -16,16 +16,16 @@ async function register(username, email, password) {
     const user = new User({
         username,
         email,
+        gender,
         hashedPassword
     });
-    //hashed password
-
-    //store user
+    
     await user.save();
     return {
         _id: user._id,
         username: user.username,
         email: user.email,
+        gender: user.gender,
         accessToken: createToken(user)
     };
 
@@ -52,10 +52,15 @@ async function login(email, password) {
         _id: user._id,
         username: user.username,
         email: user.email,
+        gender: user.gender,
         accessToken: createToken(user)
     };
 
 };
+
+async function getUserById(id) {
+    return await User.findById(id).populate('programs').lean();
+}
 
 function createToken(user) {
     const token = jwt.sign({
@@ -88,4 +93,5 @@ function createToken(user) {
 module.exports = {
     register,
     login,
+    getUserById,
 }

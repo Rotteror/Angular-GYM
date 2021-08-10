@@ -38,6 +38,15 @@
                     Invalid email !
                   </p>
                 </ng-container>
+
+                <div class="form-outline mb-4">
+                  <select class="form-control" id="gender" formControlName="gender">
+                    <option>Male</option>
+                    <option>Female</option>
+                  </select>
+                  <label class="form-label" for="gender">Gender</label>
+                </div>
+
                 <div class="form-outline mb-4">
                   <input type="password" id="password" class="form-control form-control-lg" formControlName="password">
                   <label class="form-label" for="password">Password</label>
@@ -50,7 +59,6 @@
                     Password must be at least 6 characters!
                   </p>
                 </ng-container>
-          
 
                 <div class="form-outline mb-4">
                   <input type="password" id="rePassword" class="form-control form-control-lg"

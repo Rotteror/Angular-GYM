@@ -1,11 +1,12 @@
 const router = require('express').Router();
 const { authCookieName } = require('../config');
-const { register, login } = require('../services/users');
+const { register, login, getUserById } = require('../services/users');
 
 router.post('/register', async (req, res) => {
 
     const username = req.body.username;
     const email = req.body.email;
+    const gender = req.body.gender;
     const password = req.body.password;
     try {
         if (!email.trim()) {
@@ -15,7 +16,7 @@ router.post('/register', async (req, res) => {
             throw new Error('Password must be at least 6 characters long');
         }
 
-        const userData = await register(username, email.toLocaleLowerCase(), password.trim());
+        const userData = await register(username, email.toLocaleLowerCase(), gender, password.trim());
         res.cookie(authCookieName, userData.accessToken, { httpOnly: true })
         res.json(userData)
     } catch (err) {
@@ -36,7 +37,19 @@ router.post('/login', async (req, res) => {
 })
 
 router.get('/logout', async (req, res) => {
-    res.clearCookie(authCookieName).status(204).send({message: 'Logget Out'});
+    res.clearCookie(authCookieName).status(204).send({ message: 'Logget Out' });
+})
+
+router.get('/profile/:id', async (req, res) => {
+    const id = req.params.id;
+  
+    try{
+        const user = await getUserById(id);
+        console.log(user)
+        res.status(200).json(user);
+    }catch(err){
+        res.status(409).json({message: err.message})
+    }
 })
 
 module.exports = router;
