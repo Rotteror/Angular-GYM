@@ -46,6 +46,11 @@
                   </select>
                   <label class="form-label" for="gender">Gender</label>
                 </div>
+                <ng-container *ngIf="form.get('gender')?.touched">
+                  <p *ngIf="form.get('gender')?.errors?.required" class="error">
+                    Gender is required
+                  </p>
+                </ng-container>
 
                 <div class="form-outline mb-4">
                   <input type="password" id="password" class="form-control form-control-lg" formControlName="password">

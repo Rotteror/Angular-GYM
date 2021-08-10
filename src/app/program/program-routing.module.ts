@@ -37,6 +37,7 @@ const routes: Routes = [
     {
         path: 'add-program',
         component: NewProgramComponent,
+        canActivate: [AuthActivate],
         data: {
             authenticationRequired: true,
             authenticationFailureRedirectUrl: '/login'

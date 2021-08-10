@@ -6,7 +6,7 @@
     position: relative;
 }
 
-.col-md-4{
+.col-md-12{
     margin-top:16px;
     margin-bottom: 20px;
 }
@@ -30,13 +30,18 @@ button:hover{
     
  }
 
+
  #trainerName{
      font-size: 16px;
      font-weight: bold;
  }
 
- .d-block{
+ .d-block.mb-5{
      margin-top: 20px;
+ }
+
+ fa-icon{
+     margin-right: 2px;
  }
 
  

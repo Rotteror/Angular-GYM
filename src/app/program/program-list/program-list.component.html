@@ -17,13 +17,13 @@
                 <span class="d-block mb-5">
                     {{program.description.substring(0,200).trim()+"..."}}
                 </span>
-                <div class="d-flex justify-content-between stats">
-                    <div>
-                        <fa-icon [icon]="icons.faDumbbell" size="1x"></fa-icon><span id="trainerName" class="ml-2">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-row align-items-center float-start">
+                        <fa-icon [icon]="icons.faDumbbell" size="1x"></fa-icon><span id="trainerName" class="ml-2 mb-1">
                             Coach: {{program.owner.username}}
                         </span>
                     </div>
-                    <div class="d-flex flex-row align-items-center">
+                    <div class="d-flex align-items-end">
                         <div class="details">
                             <button class="btn btn-sm" [routerLink]="['/programs', program._id]">Details</button>
                         </div>

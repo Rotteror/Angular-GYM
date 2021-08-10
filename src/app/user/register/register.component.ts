@@ -29,7 +29,6 @@ export class RegisterComponent implements OnInit {
 
   registerHandler(): void {
     const data = this.form.value;
-    console.log(this.form.value) //test
     if (this.form.invalid) { return; }
     this.userService.register(this.form.value).subscribe({
       next: (result) => {

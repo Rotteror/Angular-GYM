@@ -46,12 +46,12 @@
             <div class="list-group-item list-group-item-action" aria-current="true">
               <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">{{program.title}}</h5>
-                <span><a routerLink="/programs/{{program._id}}">Details</a></span>
+                <!-- <span><a routerLink="/programs/{{program._id}}">Details</a></span> -->
+                <span><button class="btn  align-items-center"routerLink="/programs/{{program._id}}">Details</button></span>
               </div>
               <p class="mb-1">
-               {{program.description.substring(0,40)}}
+               {{program.description.substring(0,50)}}
               </p>
-              <small>Donec id elit non mi porta.</small>
             </div>
           </div>
         </ng-container>
