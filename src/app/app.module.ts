@@ -7,9 +7,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ProgramModule } from './program/program.module';
-
-
-
+import { appInterceptorProvider } from './app-interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -23,9 +23,15 @@ import { ProgramModule } from './program/program.module';
     ProgramModule,
     HttpClientModule,
     FontAwesomeModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
+    ToastrModule.forRoot({
+      timeOut: 1000 * 3,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true
+    })
   ],
-  providers: [],
+  providers: [appInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

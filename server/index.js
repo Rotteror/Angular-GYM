@@ -38,8 +38,8 @@ async function start() {
     app.use(express.json());
 
 
-    app.use('/post', postController);
-    app.use('/users', userController);
+    app.use('/api/post', postController);
+    app.use('/api/users', userController);
 
     app.get('/', (req, res) => {
         res.send('REST Service Operational. Send requiest to /api');

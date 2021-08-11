@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { IProgram } from 'src/app/shared/interfaces/program';
 import { ProgramService } from '../program.service';
 
@@ -14,17 +14,11 @@ export class DetailsComponent implements OnInit {
   currentProgram: IProgram | undefined;
   userId = localStorage.getItem('_id');
 
+
+
   get isOwner(): boolean {
     return this.userId === this.currentProgram?.owner._id
   }
-
-  get isFollower(): boolean {
-    if (this.currentProgram) {
-      return this.currentProgram.followers.includes(this.userId + '');
-    }
-    return false;
-  }
-
 
   constructor(
     private programService: ProgramService,
@@ -32,8 +26,8 @@ export class DetailsComponent implements OnInit {
     private router: Router
   ) {
   }
-  
-  
+
+
   ngOnInit(): void {
     this.fetchCurrentProgram();
     // setTimeout(() => { this.ngOnInit() }, 1000 * 5)
@@ -69,27 +63,29 @@ export class DetailsComponent implements OnInit {
     const postId = this.currentProgram?._id;
     const userId = localStorage.getItem('_id');
     this.programService.followProgram({ userId, postId }).subscribe({
-      next: (res) => {
-        this.fetchCurrentProgram();
+      next: (program) => {
+        //this.fetchCurrentProgram();
       },
-      error: (err) => {
-        console.log(err.error.message);
-      }
+    
     })
-  
+
   };
 
   unfollowHandler(): void {
     const postId = this.currentProgram?._id;
     const userId = localStorage.getItem('_id');
     this.programService.unfollowProgram({ userId, postId }).subscribe({
-      next: (res) => {
-        this.fetchCurrentProgram();
-      },
-      error: (err) => {
-        console.log(err.error.message);
+      next: (program) => {
+       // this.fetchCurrentProgram();
       }
     })
 
+  }
+
+  get isFollower(): boolean {
+    if (this.currentProgram) {
+      return this.currentProgram.followers.includes(this.userId + '');
+    }
+    return false;
   }
 }

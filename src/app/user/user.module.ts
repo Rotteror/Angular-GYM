@@ -9,6 +9,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserService } from './user.service';
 import { ProfileComponent } from './profile/profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { appInterceptorProvider } from '../app-interceptor';
 
 
 @NgModule({
@@ -32,7 +33,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ProfileComponent
   ],
   providers: [
-    UserService
+    UserService,
   ]
 
 })

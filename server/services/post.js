@@ -29,14 +29,14 @@ async function deletePost(id) {
     return post.delete();
 }
 
-async function getPostsByUserId(id){
-    const post = await Post.find({owner: id})
+async function getPostsByUserId(id) {
+    const post = await Post.find({ owner: id })
     return post
 }
 
 async function followPost(userId, postId) {
-    const user = await User.findById(userId).populate('programs');
-    const post = await Post.findById(postId).populate('user');
+    const user = await User.findById(userId) //.populate('programs'); 
+    const post = await Post.findById(postId) //.populate('user'); 
 
     if (!user) {
         throw new Error('Invalid user')
@@ -44,10 +44,9 @@ async function followPost(userId, postId) {
     if (!post) {
         throw new Error('Invalid post');
     }
+    const userAlreadyFollowing = user.programs.indexOf(postId) //user.programs.find(p => p._id == postId);
 
-    const userAlreadyFollowing = user.programs.find(p => p._id == postId);
-
-    if (userAlreadyFollowing) {
+    if (userAlreadyFollowing != -1) {
         throw new Error('You already follow this program');
     }
 
@@ -77,7 +76,7 @@ async function unfollowPost(userId, postId) {
     if (!post) {
         throw new Error('Invalid post');
     }
-  
+
     const idIndex = post.followers.indexOf(userId);
     const postIndex = user.programs.indexOf(postId);
 
@@ -85,13 +84,16 @@ async function unfollowPost(userId, postId) {
         throw new Error('Current user is not a follower or current program dont include current user !');
     }
 
-    post.followers.splice(idIndex,1);
-    user.programs.splice(postIndex,1);
+    post.followers.splice(idIndex, 1);
+    user.programs.splice(postIndex, 1);
 
-    return Promise.all([(
-        user.save(),
-        post.save())
-    ]);
+    // return Promise.all([(
+    //     user.save(),
+    //     post.save())
+    // ]);
+    post.save();
+    user.save();
+    return post;
 
 }
 
