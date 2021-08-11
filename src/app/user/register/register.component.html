@@ -10,9 +10,6 @@
                <!-- TO DO: Make better UI error message  -->
               
                <form [formGroup]="form" (ngSubmit)="registerHandler()">
-                <ng-container *ngIf="errorRegister">
-                 <span class="error-span"> {{errorRegister}}</span>
-                </ng-container>
                 <div class="form-outline mb-4">
                   <input type="text" id="username" class="form-control form-control-lg" formControlName="username">
                   <label class="form-label" for="username">Username</label>

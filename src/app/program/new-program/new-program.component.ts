@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ProgramService } from '../program.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class NewProgramComponent implements OnInit {
 
   formPost: FormGroup
 
-  constructor(private programService: ProgramService, private fb: FormBuilder, private router: Router) {
+  constructor(private programService: ProgramService, private fb: FormBuilder, private router: Router, private toastr: ToastrService) {
     this.formPost = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(50)]],
       length: ['', [Validators.required]],
@@ -37,8 +38,8 @@ export class NewProgramComponent implements OnInit {
     if (this.formPost.invalid) { return; }
     this.programService.postProgram(data).subscribe({
       next: (result) => {
-        console.log('succesfull post new program')
         this.router.navigate(['/programs', result._id]);
+        this.toastr.success('Succesfully Add New Program', 'Done');
       },
       error: (err) => {
         console.error(err.error.message)

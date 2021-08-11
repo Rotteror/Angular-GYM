@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', preload(), async (req, res) => {
     const item = req.data.toObject();
     item._ownerId = item.owner.toString();
-    console.log(item)
+    console.log(req.user)
     res.json(item)
 });
 

@@ -10,8 +10,6 @@ import { UserService } from '../user.service';
 })
 export class LoginComponent implements OnInit {
 
-  errorLogin: string | undefined
-
   form: FormGroup;
 
   constructor(
@@ -34,15 +32,8 @@ export class LoginComponent implements OnInit {
     this.userService.login({ email, password }).subscribe({
       next: (result) => {
         localStorage.setItem('_id', result._id )
-        localStorage.setItem('email', result.email )
-        localStorage.setItem('username', result.username )
         localStorage.setItem('token', result.accessToken )
-
         this.router.navigate(['/'])
-      },
-      error: (err) => {
-        console.log(err.error.message)
-        this.errorLogin = err.error.message
       }
     })
   }

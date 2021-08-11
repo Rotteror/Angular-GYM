@@ -10,8 +10,6 @@ import { UserService } from '../user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  errorRegister: string | undefined
-
   form: FormGroup
   constructor(private userService: UserService, private fb: FormBuilder, private router: Router) {
     this.form = this.fb.group({
@@ -33,14 +31,8 @@ export class RegisterComponent implements OnInit {
     this.userService.register(this.form.value).subscribe({
       next: (result) => {
         localStorage.setItem('_id', result._id )
-        localStorage.setItem('email', result.email )
-        localStorage.setItem('username', result.username )
         localStorage.setItem('token', result.accessToken )
         this.router.navigate(['/']);
-      },
-      error: (err) => {
-        console.log(err.error.message)
-        this.errorRegister = err.error.message; 
       }
     })
   }

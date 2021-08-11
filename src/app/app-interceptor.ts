@@ -18,7 +18,7 @@ export class AppInterceptor implements HttpInterceptor {
     
     return reqStream$.pipe(
       catchError((err) => {
-          console.log('im here')
+        console.log('im in Error Interceptor Handler')
         this.toastr.error(`${err.error.message}`,'Error')
         return throwError(err);
       })

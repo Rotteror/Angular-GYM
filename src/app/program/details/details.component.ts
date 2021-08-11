@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, tap } from 'rxjs/operators';
 import { IProgram } from 'src/app/shared/interfaces/program';
 import { ProgramService } from '../program.service';
 
@@ -13,7 +12,7 @@ export class DetailsComponent implements OnInit {
 
   currentProgram: IProgram | undefined;
   userId = localStorage.getItem('_id');
-
+  isFollower!: boolean
 
 
   get isOwner(): boolean {
@@ -29,15 +28,18 @@ export class DetailsComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
     this.fetchCurrentProgram();
-    // setTimeout(() => { this.ngOnInit() }, 1000 * 5)
+    setTimeout(()=>{
+      (this.isFollower as any) = this.currentProgram?.followers.includes(this.userId + '') 
+    },100)
   }
 
   fetchCurrentProgram(): void {
     this.currentProgram = undefined;
     const id = this.activatedRoute.snapshot.params.id;
     this.programService.loadCurrentProgram(id).subscribe(program =>
-      this.currentProgram = program,
+    this.currentProgram = program,
     );
   };
 
@@ -64,9 +66,9 @@ export class DetailsComponent implements OnInit {
     const userId = localStorage.getItem('_id');
     this.programService.followProgram({ userId, postId }).subscribe({
       next: (program) => {
+        this.isFollower = !this.isFollower
         //this.fetchCurrentProgram();
       },
-    
     })
 
   };
@@ -76,16 +78,17 @@ export class DetailsComponent implements OnInit {
     const userId = localStorage.getItem('_id');
     this.programService.unfollowProgram({ userId, postId }).subscribe({
       next: (program) => {
+        this.isFollower = !this.isFollower
        // this.fetchCurrentProgram();
-      }
+      },
     })
 
   }
 
-  get isFollower(): boolean {
-    if (this.currentProgram) {
-      return this.currentProgram.followers.includes(this.userId + '');
-    }
-    return false;
-  }
+  // get isFollower(): boolean {
+  //   if (this.currentProgram) {
+  //     return this.currentProgram.followers.includes(this.userId + '');
+  //   }
+  //   return false;
+  // }
 }

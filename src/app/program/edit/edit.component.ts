@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { IProgram } from 'src/app/shared/interfaces/program';
 import { ProgramService } from '../program.service';
 
@@ -15,7 +16,7 @@ export class EditComponent implements OnInit {
   editPost: FormGroup
 
   constructor(private programService: ProgramService, private router: Router, private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder) {
+    private fb: FormBuilder, private toastr: ToastrService) {
     this.fetchCurrentProgram();
     this.editPost = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(50)]],
@@ -61,8 +62,8 @@ export class EditComponent implements OnInit {
     if(confirmed){
       this.programService.editProgram(id, data).subscribe({
         next: () => {
-          console.log('succesfully edit post');
           this.router.navigate(['programs', id])
+          this.toastr.success('Succesfully Edit Post', 'Done')
         },
         error: (err) => {
           console.log(err.error.message)

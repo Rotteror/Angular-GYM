@@ -9,7 +9,6 @@ export class ProgramService {
 
 
   constructor(private http: HttpClient) {
-
   }
 
   //Load all programs from DB
