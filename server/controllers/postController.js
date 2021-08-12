@@ -3,7 +3,7 @@ const { isAuth, isOwner } = require('../middlewares/guards');
 const preload = require('../middlewares/preload');
 const { getAllPost, createPost, getPostById,
     updatePost, deletePost, followPost,
-    unfollowPost, getPostsByUserId, createComment } = require('../services/post');
+    unfollowPost, getPostsByUserId, createComment, deleteComment } = require('../services/post');
 const parserError = require('../utils/errorParser');
 
 
@@ -118,6 +118,19 @@ router.post('/add-comment/:id', isAuth(), async (req, res) => {
         const result = await createComment(postId, comment);
         res.status(200).json(result)
     } catch (err) {
+        const message = parserError(err);
+        res.status(err.status || 400).json({ message })
+    }
+});
+
+router.post('/deleteComment/:id', isAuth(), async (req, res)=> {
+    const commentId = req.body.id;
+    const postId = req.params.id
+    console.log(req.params)
+    try{
+        const result = await deleteComment(commentId, postId);
+        res.status(200).json(result) 
+    }catch(err){
         const message = parserError(err);
         res.status(err.status || 400).json({ message })
     }

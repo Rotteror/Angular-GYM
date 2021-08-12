@@ -118,6 +118,25 @@ async function createComment(postId, comment) {
     return post;
 }
 
+async function deleteComment(commentId, postId) {
+    const comment = await Comment.findById(commentId);
+    if (!comment) {
+        throw new Error('Invalid Comment !');
+    }
+    const post = await Post.findById(postId);
+    if (!post) {
+        throw new Error('Invlaid post !')
+    }
+    const indexComment = post.comments.indexOf(commentId);
+    if(indexComment == -1){
+        throw new Error('No comments to delete or incorrect post ID !')
+    }
+    post.comments.splice(indexComment, 1);
+    post.save();
+    return comment.delete();
+
+}
+
 
 module.exports = {
     getAllPost,
@@ -129,4 +148,5 @@ module.exports = {
     unfollowPost,
     deletePost,
     getPostsByUserId,
+    deleteComment,
 }

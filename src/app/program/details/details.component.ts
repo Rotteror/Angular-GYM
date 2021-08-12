@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { IProgram } from 'src/app/shared/interfaces/program';
 import { ProgramService } from '../program.service';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-details',
@@ -14,10 +15,13 @@ import { ProgramService } from '../program.service';
 })
 export class DetailsComponent implements OnInit, OnDestroy {
 
+  icons = {
+    faTrashAlt
+  }
+
   currentProgram: IProgram | undefined;
   userId = localStorage.getItem('_id');
   isFollower!: boolean
-
 
   refreshProgram$ = new BehaviorSubject<boolean>(true);
 
@@ -55,16 +59,14 @@ export class DetailsComponent implements OnInit, OnDestroy {
   deleteHandler(): void {
     const id = this.currentProgram?._id
     if (!id) {
-      throw new Error('Something went wrong , missing arguments');
+      throw new Error('Something went wrong , missing program');
     }
     const confirmed = confirm('Are you sure you want delete this article!')
     if (confirmed) {
       this.programService.deleteProgram(id).subscribe({
         next: () => {
           this.router.navigate(['/'])
-        },
-        error: (err) => {
-          console.log(err.error.message)
+          this.toastr.success('You succesfully delete post', 'Done')
         }
       });
     }
@@ -113,10 +115,23 @@ export class DetailsComponent implements OnInit, OnDestroy {
     })
   }
 
+  deleteComment(id: string): void {
+    console.log(id)
+    const confirmed = confirm('Are you sure you want delete this comment!')
+    if (confirmed) {
+      this.programService.deleteCommentFromProgram(id, this.currentProgram?._id).subscribe({
+        next: () => {
+          this.refreshProgram$.next(true)
+          this.toastr.success('You succesfully delete comment', 'Done')
+        }
+      });
+    }
+
+  }
+
   ngOnDestroy(): void {
     this.refreshProgram$.next(true);
     this.refreshProgram$.complete();
   }
-
 
 }

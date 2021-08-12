@@ -63,9 +63,18 @@
             <div class="row">
                 <div class="col-sm-5 col-md-6 col-12 pb-4">
                     <h3>Comments</h3>
-                    <div *ngFor="let comment of currentProgram?.comments" class="comment mt-4 text-justify float-left" >
-                        <h3>{{comment.author.username}}</h3> <span class="py-2">Posted at: {{comment.created_At.replace('T', ' ').substring(0,16)}}</span> <br>
-                        <p>{{comment.content}}</p>
+                    <div *ngFor="let comment of currentProgram?.comments" class="comment mt-4 text-justify float-left">
+                        <h3>{{comment.author.username}}</h3> <span class="py-2">Posted at:
+                            {{comment.created_At.replace('T', ' ').substring(0,16)}}</span> <br>
+                        <p>{{comment.content}}<span *ngIf="comment.author._id == userId" class="float-end">
+                                <fa-icon [icon]="icons.faTrashAlt" size="1x" (click)="deleteComment(comment._id)">
+                                </fa-icon>
+                            </span>
+                            <span *ngIf="isOwner" class="float-end">
+                                <fa-icon [icon]="icons.faTrashAlt" size="1x" (click)="deleteComment(comment._id)">
+                                </fa-icon>
+                            </span>
+                        </p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
