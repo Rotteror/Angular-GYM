@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { BehaviorSubject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { IProgram } from 'src/app/shared/interfaces/program';
 import { ProgramService } from '../program.service';
 
@@ -10,14 +12,14 @@ import { ProgramService } from '../program.service';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, OnDestroy {
 
   currentProgram: IProgram | undefined;
-  comments: [] = [];
-
   userId = localStorage.getItem('_id');
   isFollower!: boolean
 
+
+  refreshProgram$ = new BehaviorSubject<boolean>(true);
 
   get isOwner(): boolean {
     return this.userId === this.currentProgram?.owner._id
@@ -29,7 +31,7 @@ export class DetailsComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService
   ) {
-   
+
   }
 
 
@@ -43,9 +45,11 @@ export class DetailsComponent implements OnInit {
   fetchCurrentProgram(): void {
     this.currentProgram = undefined;
     const id = this.activatedRoute.snapshot.params.id;
-    this.programService.loadCurrentProgram(id).subscribe(program =>
-      this.currentProgram = program,
-    );
+    // this.programService.loadCurrentProgram(id).subscribe(program =>
+    //   this.currentProgram = program,
+    // );
+    this.refreshProgram$.pipe(switchMap(_ => this.programService.loadCurrentProgram(id)))
+      .subscribe(program => this.currentProgram = program)
   };
 
   deleteHandler(): void {
@@ -72,7 +76,6 @@ export class DetailsComponent implements OnInit {
     this.programService.followProgram({ userId, postId }).subscribe({
       next: (program) => {
         this.isFollower = !this.isFollower
-        //this.fetchCurrentProgram();
       },
     })
 
@@ -84,7 +87,7 @@ export class DetailsComponent implements OnInit {
     this.programService.unfollowProgram({ userId, postId }).subscribe({
       next: (program) => {
         this.isFollower = !this.isFollower
-        // this.fetchCurrentProgram();
+        this.refreshProgram$.next(true)
       },
     })
 
@@ -102,13 +105,18 @@ export class DetailsComponent implements OnInit {
     const { content } = form.value;
     if (!this.currentProgram) { return }
     this.programService.addCommentToProgram(this.currentProgram._id, { content }).subscribe({
-      next: (res) => {
+      next: () => {
+        this.refreshProgram$.next(true)
         this.toastr.success('Succesfully added comment !', 'Done');
+        form.reset();
       },
-      error: () => {
-
-      }
     })
   }
+
+  ngOnDestroy(): void {
+    this.refreshProgram$.next(true);
+    this.refreshProgram$.complete();
+  }
+
 
 }
