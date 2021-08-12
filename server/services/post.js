@@ -1,3 +1,4 @@
+const Comment = require('../models/Comment');
 const Post = require('../models/Post');
 const User = require('../models/User');
 
@@ -6,7 +7,10 @@ async function getAllPost() {
 }
 
 async function getPostById(id) {
-    return await Post.findById(id).populate('owner');
+    return await Post.findById(id).populate('owner').populate({
+        path: 'comments',
+        populate: { path: 'author' },
+    });
 }
 
 async function createPost(data) {
@@ -97,12 +101,30 @@ async function unfollowPost(userId, postId) {
 
 }
 
+async function createComment(postId, comment) {
+    const post = await Post.findById(postId).populate('comments').populate({
+        path: 'comments',
+        populate: { path: 'author' },
+    });
+
+    if (!post) {
+        throw new Error('Invalid program reference !');
+    }
+    const newComment = new Comment(comment);
+    await newComment.save();
+
+    post.comments.push(newComment);
+    await post.save();
+    return post;
+}
+
 
 module.exports = {
     getAllPost,
     getPostById,
     updatePost,
     createPost,
+    createComment,
     followPost,
     unfollowPost,
     deletePost,

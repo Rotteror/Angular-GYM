@@ -7,5 +7,6 @@ export interface IProgram {
     averageDuration: string,
     daysPerWeek: string,
     followers: string[],
+    comments: any,
     owner: any,
 }

@@ -9,7 +9,8 @@ const postSchema = new mongoose.Schema({
     averageDuration: { type: String, required: [true, 'Avg Duration is required'] },
     daysPerWeek: { type: String, required: [true, 'Days Per Week is required'] },
     owner: { type: ObjectId, ref: 'User' },
-    followers: [{ type: ObjectId, ref: 'User' , default:[] }]
+    followers: [{ type: ObjectId, ref: 'User', default: [] }],
+    comments: [{ type: ObjectId, ref: 'Comment', default: [] }],
 });
 
 module.exports = mongoose.model('Post', postSchema)

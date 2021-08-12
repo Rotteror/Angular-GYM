@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { IProgram } from 'src/app/shared/interfaces/program';
 import { ProgramService } from '../program.service';
 
@@ -11,6 +13,8 @@ import { ProgramService } from '../program.service';
 export class DetailsComponent implements OnInit {
 
   currentProgram: IProgram | undefined;
+  comments: [] = [];
+
   userId = localStorage.getItem('_id');
   isFollower!: boolean
 
@@ -22,24 +26,25 @@ export class DetailsComponent implements OnInit {
   constructor(
     private programService: ProgramService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
+   
   }
 
 
   ngOnInit(): void {
-    
     this.fetchCurrentProgram();
-    setTimeout(()=>{
-      (this.isFollower as any) = this.currentProgram?.followers.includes(this.userId + '') 
-    },100)
+    setTimeout(() => {
+      (this.isFollower as any) = this.currentProgram?.followers.includes(this.userId + '')
+    }, 100);
   }
 
   fetchCurrentProgram(): void {
     this.currentProgram = undefined;
     const id = this.activatedRoute.snapshot.params.id;
     this.programService.loadCurrentProgram(id).subscribe(program =>
-    this.currentProgram = program,
+      this.currentProgram = program,
     );
   };
 
@@ -79,7 +84,7 @@ export class DetailsComponent implements OnInit {
     this.programService.unfollowProgram({ userId, postId }).subscribe({
       next: (program) => {
         this.isFollower = !this.isFollower
-       // this.fetchCurrentProgram();
+        // this.fetchCurrentProgram();
       },
     })
 
@@ -91,4 +96,19 @@ export class DetailsComponent implements OnInit {
   //   }
   //   return false;
   // }
+
+  addComment(form: NgForm): void {
+    if (form.invalid) { return };
+    const { content } = form.value;
+    if (!this.currentProgram) { return }
+    this.programService.addCommentToProgram(this.currentProgram._id, { content }).subscribe({
+      next: (res) => {
+        this.toastr.success('Succesfully added comment !', 'Done');
+      },
+      error: () => {
+
+      }
+    })
+  }
+
 }

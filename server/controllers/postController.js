@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const { isAuth, isOwner } = require('../middlewares/guards');
 const preload = require('../middlewares/preload');
-const { getAllPost, createPost, getPostById, updatePost, deletePost, followPost, unfollowPost, getPostsByUserId } = require('../services/post');
+const { getAllPost, createPost, getPostById,
+    updatePost, deletePost, followPost,
+    unfollowPost, getPostsByUserId, createComment } = require('../services/post');
 const parserError = require('../utils/errorParser');
 
 
@@ -72,7 +74,6 @@ router.get('/delete/:id', isAuth(), preload(), isOwner(), async (req, res) => {
 router.post('/follow', isAuth(), async (req, res) => {
     const userId = req.user._id;
     const postId = req.body.data.postId;
-
     try {
         const result = await followPost(userId, postId);
         res.status(200).json(result)
@@ -103,6 +104,22 @@ router.get('/profile/:id', isAuth(), async (req, res) => {
     } catch (err) {
         const message = parserError(err);
         res.status(err.status || 400).json({ message });
+    }
+})
+
+router.post('/add-comment/:id', isAuth(), async (req, res) => {
+    const postId = req.params.id
+    const authorId = req.user._id
+    const comment = {
+        author: authorId,
+        content: req.body.content
+    };
+    try {
+        const result = await createComment(postId, comment);
+        res.status(200).json(result)
+    } catch (err) {
+        const message = parserError(err);
+        res.status(err.status || 400).json({ message })
     }
 })
 

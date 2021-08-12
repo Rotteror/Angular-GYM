@@ -44,4 +44,8 @@ export class ProgramService {
   loadUserPrograms(id: string) {
     return this.http.get<IProgram>(`${API_URL}/post/profile/${id}`, { withCredentials: true });
   }
+
+  addCommentToProgram(id: string, data: {content: string}) {
+    return this.http.post<IProgram>(`${API_URL}/post/add-comment/${id}`, data, { withCredentials: true });
+  }
 }
