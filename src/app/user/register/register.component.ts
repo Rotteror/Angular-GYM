@@ -20,8 +20,9 @@ export class RegisterComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       rePassword: ['', [Validators.required]],
     },{
-      validator: this.customValidator.passwordMatchValidator('password','rePassword')
-    });
+      validator: [this.customValidator.passwordMatchValidator('password','rePassword'), this.customValidator.usernameValidator('username')]
+    },
+    );
   }
 
 

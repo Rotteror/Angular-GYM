@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-
+const pattern = /^(?=.{5,20}$)(^[a-zA-Z]+[0-9]?([-_\.][a-zA-Z0-9]+)*[a-zA-Z0-9]$)/;
 @Injectable()
 export class CustomValidationService {
 
   constructor() { }
 
   passwordMatchValidator(password: string, rePassword: string) {
-    return (formGrupup: FormGroup) => {
-      const passwordControl = formGrupup.controls[password];
-      const rePasswordControl = formGrupup.controls[rePassword];
-      console.log(passwordControl,rePasswordControl)
+    return (formGr: FormGroup) => {
+      const passwordControl = formGr.controls[password];
+      const rePasswordControl = formGr.controls[rePassword];
+
       if (!passwordControl || !rePasswordControl) {
         return null;
       }
@@ -27,5 +27,19 @@ export class CustomValidationService {
       }
     }
 
+  }
+
+  usernameValidator(username: string) {
+    return (formG: FormGroup) => {
+      const usernameControl = formG.controls[username];
+      if (!usernameControl) {
+        return null;
+      }
+      if (pattern.test(usernameControl.value)) {
+        return usernameControl.setErrors(null);
+      } else {
+        return usernameControl.setErrors({ invalidUsername: true })
+      }
+    }
   }
 }

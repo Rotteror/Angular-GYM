@@ -5,9 +5,18 @@ const { SECRET } = require('../config');
 
 async function register(username, email, gender, password) {
     //check if user exist
-    const existing = await User.findOne({ email });
-    if (existing) {
+    const existingByEmail = await User.findOne({ email });
+    const users = await User.find({});
+    
+    if (existingByEmail) {
         const err = new Error('User already exist !');
+        err.status = 409;
+        throw err;
+    }
+    
+    const existUsername = users.find(u => u.username.toLocaleLowerCase() === username.toLocaleLowerCase())
+    if (existUsername) {
+        const err = new Error('Username already taken !');
         err.status = 409;
         throw err;
     }

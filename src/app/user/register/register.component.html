@@ -22,6 +22,9 @@
                   <p *ngIf="form.get('username')?.errors?.minlength" class="error">
                     Username should be at least 5 characters long
                   </p>
+                  <p *ngIf="form.get('username')?.errors?.invalidUsername" class="error">
+                    Username can contain letters and numbers only !
+                  </p>
                 </ng-container>
                 <div class="form-outline mb-4">
                   <input type="email" id="email" class="form-control form-control-lg" formControlName="email">
