@@ -14,9 +14,13 @@ export class NewProgramComponent implements OnInit {
 
   formPost: FormGroup
 
-  constructor(private programService: ProgramService, private fb: FormBuilder, private router: Router, private toastr: ToastrService) {
+  constructor(
+    private programService: ProgramService,
+    private fb: FormBuilder,
+    private router: Router,
+    private toastr: ToastrService) {
     this.formPost = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(50)]],
+      title: ['', [Validators.required, Validators.minLength(30)]],
       length: ['', [Validators.required]],
       bodyFocus: ['', [Validators.required]],
       averageDuration: ['', [Validators.required]],
@@ -28,7 +32,7 @@ export class NewProgramComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  cancelPostHandler(): void{
+  cancelPostHandler(): void {
     this.router.navigate(['../'])
   }
 

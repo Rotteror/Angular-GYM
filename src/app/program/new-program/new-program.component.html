@@ -13,13 +13,11 @@
       </div>
       <!-- Validations -->
       <ng-container *ngIf="formPost.get('title')?.touched">
-        <p *ngIf="formPost.get('title')?.errors?.required" class="error">
+        <p *ngIf="formPost.get('title')?.errors?.required" class="error p-2">
           Title is required
         </p>
-      </ng-container>
-      <ng-container *ngIf="formPost.get('title')?.touched">
         <p *ngIf="formPost.get('title')?.errors?.minlength" class="error">
-          Title should be at least 50 characters! 
+          Title should be at least 30 characters!
         </p>
       </ng-container>
       <div class="col">
@@ -84,8 +82,6 @@
       <p *ngIf="formPost.get('description')?.errors?.required" class="error">
         Description is required
       </p>
-    </ng-container>
-    <ng-container *ngIf="formPost.get('description')?.touched">
       <p *ngIf="formPost.get('description')?.errors?.maxlength" class="error">
         Description should be no more than 1000 characters!
       </p>

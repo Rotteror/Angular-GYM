@@ -110,6 +110,15 @@ padding-top: 100px;
 .darker p,
 .darker span {
     color: rgb(16, 46, 46, 1)
+  
+}
+.comment p{
+    font-weight: 400;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+.comment span{
+    font-size: 13px;
+    font-weight: 400;
 }
 
 label {

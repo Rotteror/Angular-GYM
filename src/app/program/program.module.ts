@@ -10,6 +10,7 @@ import { ProgramRoutingModule } from './program-routing.module';
 import { EditComponent } from './edit/edit.component';
 
 
+
 @NgModule({
   declarations: [
     NewProgramComponent,
@@ -26,7 +27,7 @@ import { EditComponent } from './edit/edit.component';
   ],
   exports:[ ],
   providers:[
-    ProgramService
+    ProgramService,
   ]
 })
 export class ProgramModule { }

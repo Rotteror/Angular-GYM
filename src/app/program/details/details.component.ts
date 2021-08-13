@@ -41,9 +41,18 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchCurrentProgram();
+
+    //After fetch all data find first Follower - value
     setTimeout(() => {
       (this.isFollower as any) = this.currentProgram?.followers.includes(this.userId + '')
     }, 100);
+
+    //navigate to 404 if Program dont exist!
+    setTimeout(() => {
+      if (this.currentProgram === undefined) {
+        this.router.navigate(['/404']);
+      }
+    }, 300)
   }
 
   fetchCurrentProgram(): void {
