@@ -9,7 +9,7 @@ const parserError = require('../utils/errorParser');
 
 router.get('/', async (req, res) => {
     const data = await getAllPost();
-    res.json(data)
+    res.status(200).json(data)
 });
 
 router.get('/:id', preload(), async (req, res) => {

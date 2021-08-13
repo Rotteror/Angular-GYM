@@ -10,8 +10,6 @@ import { ProgramRoutingModule } from './program-routing.module';
 import { EditComponent } from './edit/edit.component';
 
 
-
-
 @NgModule({
   declarations: [
     NewProgramComponent,
@@ -25,14 +23,8 @@ import { EditComponent } from './edit/edit.component';
     FormsModule,
     ReactiveFormsModule,
     ProgramRoutingModule,
-    
   ],
-  exports:[
-    NewProgramComponent,
-    ProgramListComponent,
-    DetailsComponent,
-    EditComponent
-  ],
+  exports:[ ],
   providers:[
     ProgramService
   ]

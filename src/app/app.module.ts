@@ -10,26 +10,28 @@ import { ProgramModule } from './program/program.module';
 import { appInterceptorProvider } from './app-interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { ToastrModule } from 'ngx-toastr';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
     UserModule,
-    CoreModule,
     ProgramModule,
+    CoreModule,
     HttpClientModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     ToastrModule.forRoot({
       timeOut: 1000 * 3,
       positionClass: 'toast-top-right',
       preventDuplicates: true
-    })
+    }),
+    AppRoutingModule,
   ],
   providers: [appInterceptorProvider],
   bootstrap: [AppComponent]
