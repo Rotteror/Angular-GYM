@@ -68,6 +68,15 @@
                   <label class="form-label" for="rePassword">Repeat your password</label>
                 </div>
 
+                <ng-container *ngIf="form.get('rePassword')?.touched">
+                  <p *ngIf="form.get('rePassword')?.errors?.required" class="error">
+                    Password is required!
+                  </p>
+                  <p *ngIf="form.get('rePassword')?.errors?.passwordMissmatch" class="error">
+                    Confirm password don't match
+                  </p>
+                </ng-container>
+
                 <div class="d-flex justify-content-center">
                   <button class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                 </div>

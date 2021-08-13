@@ -66,7 +66,7 @@
                     <div *ngFor="let comment of currentProgram?.comments" class="comment mt-4 text-justify float-left">
                         <h3>{{comment.author.username}}</h3> <span class="py-2">Posted at:
                             {{comment.created_At.replace('T', ' ').substring(0,16)}}</span> <br>
-                        <p>{{comment.content}}<span *ngIf="comment.author._id == userId" class="float-end">
+                        <p>{{comment.content}}<span *ngIf="comment.author._id == userId && !isOwner" class="float-end">
                                 <fa-icon [icon]="icons.faTrashAlt" size="1x" (click)="deleteComment(comment._id)">
                                 </fa-icon>
                             </span>
