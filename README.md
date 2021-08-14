@@ -39,3 +39,6 @@ Run `nodemon` for a API server. Navigate to `http://localhost:3000/`
 npm install
 
 
+## SoftUni 2021/08 - All Rights Reserved by - Rotteror ##
+
+
