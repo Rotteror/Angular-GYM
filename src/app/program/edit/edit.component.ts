@@ -19,7 +19,7 @@ export class EditComponent implements OnInit {
     private fb: FormBuilder, private toastr: ToastrService) {
     this.fetchCurrentProgram();
     this.editPost = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(50)]],
+      title: ['', [Validators.required, Validators.minLength(30)]],
       length: ['', [Validators.required]],
       bodyFocus: ['', [Validators.required]],
       averageDuration: ['', [Validators.required]],
@@ -49,7 +49,7 @@ export class EditComponent implements OnInit {
   };
 
   cancelEditHandler(): void {
-    this.router.navigate(['../'])
+    this.router.navigate(['/programs', this.currentProgram?._id])
   }
 
   editProgramHandler(): void {

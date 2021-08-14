@@ -12,7 +12,7 @@ export class UserService {
   currentUser: IUser | null | undefined = undefined;
 
   get isLogged(): boolean {
-    return localStorage.getItem('token') != undefined;
+    return localStorage.getItem('_id') != undefined;
   }
 
   constructor(private http: HttpClient) { }

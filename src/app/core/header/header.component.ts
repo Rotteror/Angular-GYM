@@ -34,10 +34,7 @@ export class HeaderComponent implements OnInit {
   logoutHandler(): void {
     this.userService.logout().subscribe({
       next: () => {
-        localStorage.removeItem('email');
         localStorage.removeItem('_id');
-        localStorage.removeItem('username');
-        localStorage.removeItem('token')
         this.router.navigate(['/']);
       },
       error: (err) => {

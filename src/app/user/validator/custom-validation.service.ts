@@ -35,6 +35,11 @@ export class CustomValidationService {
       if (!usernameControl) {
         return null;
       }
+
+      if (usernameControl.value.length < 5) {
+        return usernameControl.setErrors({ minlength: true });
+      }
+
       if (pattern.test(usernameControl.value)) {
         return usernameControl.setErrors(null);
       } else {
